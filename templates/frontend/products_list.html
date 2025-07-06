@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+{% load frontend_extras %}
 {% load static %} 
  {% block title %}Product List{% endblock %} 
  {% block extra_css %}
@@ -204,25 +205,50 @@
         <div class="product-card" data-product-id="{{ product.id }}">
             <img src="{{ product.images.yellow }}" class="product-image" data-color="yellow" alt="{{ product.name }}">
             <div class="product-title">{{ product.name }}</div>
-            <div class="product-price">$101.00 USD</div>
+            <div class="product-price">
+                <span class="dynamic-price">{{ product.get_formatted_price }}</span>
+
+            </div>
             <div class="color-dots">
                 {% for color in product.get_available_colors %}
                 <div class="color-dot {{ color }}{% if forloop.first %} active{% endif %}" data-color="{{ color }}" tabindex="0"></div>
                 {% endfor %}
             </div>
             <div class="color-label">Yellow Gold</div>
-            <div class="star-rating">
-                {% for i in "12345" %} {% if product.popularity_score|floatformat:1 >= i %}
-                <span class="star">&#9733;</span> {% elif product.popularity_score|floatformat:1 > i|add:"-1" %}
-                <span class="star">&#9733;</span> {% else %}
-                <span class="star empty">&#9733;</span> {% endif %} {% endfor %}
-                <span class="rating-value">{{ product.popularity_score|floatformat:1 }}/5</span>
+            <div class="product-popularity">
+                <span class="star-rating">
+                    {% with score=product.popularity_score|mul:5 %}
+                        {% for i in "12345" %}
+                            {% with star_value=forloop.counter %}
+                                {% if star_value <= score %}
+                                    <span class="star filled">&#9733;</span>
+                                {% elif star_value > score and star_value|subtract:1 < score %}
+                                    <span class="star half">&#9733;</span>
+                                {% else %}
+                                    <span class="star">&#9733;</span>
+                                {% endif %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% endwith %}
+                </span>
+                <span class="popularity-score">{{ product.popularity_score|mul:5|floatformat:1 }}/5</span>
             </div>
         </div>
         {% endfor %}
     </div>
     <button class="slider-arrow right" id="sliderRight" aria-label="Next">&#8250;</button>
 </div>
+<script>
+    window.productImages = {
+        {% for product in products %}
+        '{{ product.id }}': {
+            {% for color in product.get_available_colors %}
+            '{{ color }}': '{{ product.images|dict_get:color }}'{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    };
+</script>
 {% endblock %} {% block extra_js %}
 <script src="{% static 'js/main.js' %}"></script>
 <script>

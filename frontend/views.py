@@ -65,6 +65,7 @@ def products_list(request):
         'products': products,
         'total_products': products.count(),
         'available_colors': list(all_colors),
+        'color_list': ['yellow', 'white', 'rose'],
         'filters': {
             'min_popularity': min_popularity,
             'max_popularity': max_popularity,

@@ -145,6 +145,26 @@
     background: linear-gradient(45deg, #e91e63, #f06292);
 }
 
+.color-dot.color-yellow {
+    background: #E6CA97;
+}
+
+.color-dot.color-white {
+    background: #D9D9D9;
+}
+
+.color-dot.color-rose {
+    background: #E1A4A9;
+}
+
+.color-dot.disabled {
+    background: #f3f3f3 !important;
+    border: 2px solid #e0e0e0 !important;
+    opacity: 0.4;
+    pointer-events: none;
+    box-shadow: none;
+}
+
 
 /* Product Gallery */
 
@@ -353,4 +373,194 @@
 
 .shadow-custom:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Price Styling */
+
+.product-price {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.dynamic-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.price-note {
+    display: block;
+    font-size: 0.8em;
+    color: #7f8c8d;
+    margin-top: 2px;
+}
+
+.price-formula {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+.formula-text {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.formula-breakdown {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+}
+
+
+/* Gold Price Indicator */
+
+.gold-price-indicator {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #8b6914;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: inline-block;
+    margin: 5px 0;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+
+/* Real-time Price Animation */
+
+@keyframes priceUpdate {
+    0% {
+        background-color: #fff;
+    }
+    50% {
+        background-color: #e8f5e8;
+    }
+    100% {
+        background-color: #fff;
+    }
+}
+
+.price-updated {
+    animation: priceUpdate 1s ease-in-out;
+}
+
+
+/* Color Dots (Gold Options) */
+
+.color-dots {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 10px 0 2px 0;
+}
+
+.color-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    display: inline-block;
+    cursor: pointer;
+    transition: border 0.2s;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.color-dot[data-color="yellow"] {
+    background: #E6CA97;
+}
+
+.color-dot[data-color="white"] {
+    background: #D9D9D9;
+}
+
+.color-dot[data-color="rose"] {
+    background: #E1A4A9;
+}
+
+.color-dot.active {
+    border: 2px solid #222;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #222;
+}
+
+.color-label {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 15px;
+    color: #222;
+    margin-top: 2px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+
+/* Star Rating */
+
+.star-rating {
+    display: inline-block;
+    font-size: 22px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.star-rating .fa-star,
+.star {
+    color: #D9D9D9;
+    margin-right: 2px;
+    font-size: 22px;
+}
+
+.star-rating .fa-star.checked,
+.star.filled {
+    color: #E6CA97;
+}
+
+.popularity-score {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 15px;
+    color: #222;
+    font-weight: 500;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+
+/* Product Title & Price */
+
+.product-title {
+    font-family: 'Avenir Book', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.product-price {
+    font-family: 'Avenir Book', Arial, sans-serif;
+    font-size: 12px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.star.half {
+    position: relative;
+    display: inline-block;
+}
+
+.star.half:before {
+    content: '\2605';
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #E6CA97;
+    z-index: 1;
+}
+
+.star.half {
+    color: #D9D9D9;
 }

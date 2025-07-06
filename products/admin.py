@@ -3,7 +3,7 @@ from .models import Product
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'popularity_score', 'weight', 'created_at', 'updated_at']
+    list_display = ['name', 'price', 'popularity_score', 'weight', 'created_at', 'updated_at']
     list_filter = ['created_at', 'updated_at']
     search_fields = ['name']
     readonly_fields = ['created_at', 'updated_at']
@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'popularity_score', 'weight')
+            'fields': ('name', 'price', 'popularity_score', 'weight')
         }),
         ('Images', {
             'fields': ('images',),

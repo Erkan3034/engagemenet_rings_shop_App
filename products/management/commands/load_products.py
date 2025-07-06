@@ -4,7 +4,7 @@ import json
 import os
 
 class Command(BaseCommand):
-    help = 'Load products from JSON file'
+    help = 'Load products from JSON file with dynamic pricing'
 
     def handle(self, *args, **options):
         # Path to the products.json file (relative to project root)
@@ -31,22 +31,23 @@ class Command(BaseCommand):
                 if created:
                     created_count += 1
                     self.stdout.write(
-                        self.style.SUCCESS(f'Created product: {product.name}')
+                        self.style.SUCCESS(f'Created product: {product.name} - Price: {product.get_formatted_price()}')
                     )
                 else:
                     # Update existing product
                     product.popularity_score = product_data['popularityScore']
                     product.weight = product_data['weight']
                     product.images = product_data['images']
-                    product.save()
+                    product.save()  # This will trigger dynamic price calculation
                     updated_count += 1
                     self.stdout.write(
-                        self.style.WARNING(f'Updated product: {product.name}')
+                        self.style.WARNING(f'Updated product: {product.name} - New Price: {product.get_formatted_price()}')
                     )
             
             self.stdout.write(
                 self.style.SUCCESS(
-                    f'Successfully loaded products. Created: {created_count}, Updated: {updated_count}'
+                    f'Successfully processed {len(products_data)} products. '
+                    f'Created: {created_count}, Updated: {updated_count}'
                 )
             )
             

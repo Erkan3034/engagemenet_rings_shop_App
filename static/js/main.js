@@ -303,16 +303,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const productImages = window.productImages ? window.productImages[productId] : null;
         colorDots.forEach(dot => {
             dot.addEventListener('click', function() {
+                if (this.classList.contains('disabled')) return;
                 colorDots.forEach(d => d.classList.remove('active'));
                 this.classList.add('active');
                 const color = this.getAttribute('data-color');
-                // Change image src
-                if (img && productImages && productImages[color]) {
-                    img.src = productImages[color];
-                } else if (img) {
-                    img.src = img.src.replace(/(yellow|white|rose)/, color);
+                // Change image src with fallback
+                if (img && productImages) {
+                    if (productImages[color]) {
+                        img.src = productImages[color];
+                    } else {
+                        // fallback
+                        const firstColor = Object.keys(productImages)[0];
+                        img.src = productImages[firstColor];
+                    }
                 }
-                // Change label
+                // Update color label
                 if (colorLabel) {
                     if (color === 'yellow') colorLabel.textContent = 'Yellow Gold';
                     else if (color === 'white') colorLabel.textContent = 'White Gold';
@@ -336,6 +341,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     // --- End Product List Slider & Color Logic ---
+
+    // Carousel swipe/drag support
+    const slider = document.getElementById('productSlider');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    if (slider) {
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; //scroll-fast
+            slider.scrollLeft = scrollLeft - walk;
+        });
+        // Touch events
+        slider.addEventListener('touchstart', (e) => {
+            isDown = true;
+            startX = e.touches[0].pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('touchend', () => {
+            isDown = false;
+        });
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            const x = e.touches[0].pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }
 
     console.log('Engagement Rings Application initialized successfully!');
 });
