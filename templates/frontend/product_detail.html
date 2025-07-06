@@ -1,0 +1,167 @@
+{% extends 'base.html' %} {% block title %}{{ product.name }} - Engagement Rings Collection{% endblock %} {% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="bg-light py-2">
+    <div class="container">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Ana Sayfa</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products_list' %}">Ürünler</a></li>
+            <li class="breadcrumb-item active">{{ product.name }}</li>
+        </ol>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <div class="row">
+        <!-- Product Images -->
+        <div class="col-lg-6 mb-4">
+            <div class="product-gallery">
+                <div class="main-image-container mb-3">
+                    <img id="mainImage" src="{{ product.images.white }}" class="img-fluid rounded shadow" alt="{{ product.name }}">
+                </div>
+
+                <!-- Color Options -->
+                <div class="color-options">
+                    <h6 class="mb-3">Renk Seçenekleri:</h6>
+                    <div class="d-flex gap-2">
+                        {% for color in available_colors %}
+                        <button class="btn btn-outline-primary color-btn" data-color="{{ color }}" data-image="{{ product.images|get_item:color }}" onclick="changeImage('{{ product.images|get_item:color }}', '{{ color }}')">
+                            <span class="color-dot color-{{ color }} me-2"></span>
+                            {{ color|title }}
+                        </button> {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+            <div class="product-info">
+                <h1 class="product-title mb-3">{{ product.name }}</h1>
+
+                <!-- Product Meta -->
+                <div class="product-meta mb-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="meta-item">
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <strong>Popülerlik:</strong> {{ product.popularity_score|floatformat:2 }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="meta-item">
+                                <i class="fas fa-weight-hanging text-info me-2"></i>
+                                <strong>Ağırlık:</strong> {{ product.weight }}g
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Description -->
+                <div class="product-description mb-4">
+                    <h5>Ürün Açıklaması</h5>
+                    <p class="text-muted">
+                        Bu özel nişan yüzüğü, aşkınızın benzersiz hikayesini yansıtır. Mükemmel işçilik ve kaliteli malzemelerle üretilmiştir. Farklı renk seçenekleri ile kişisel zevkinize uygun olanı seçebilirsiniz.
+                    </p>
+                </div>
+
+                <!-- Product Features -->
+                <div class="product-features mb-4">
+                    <h5>Özellikler</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success me-2"></i>Yüksek kaliteli malzeme</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Profesyonel işçilik</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Farklı renk seçenekleri</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Dayanıklı tasarım</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Özel kutuda teslimat</li>
+                    </ul>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="product-actions">
+                    <div class="d-grid gap-2 d-md-block">
+                        <button class="btn btn-primary btn-lg me-md-2">
+                            <i class="fas fa-shopping-cart me-2"></i>Sepete Ekle
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-heart me-2"></i>Favorilere Ekle
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <i class="fas fa-shipping-fast text-primary me-2"></i>
+                                <small>Ücretsiz Kargo</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <i class="fas fa-shield-alt text-success me-2"></i>
+                                <small>Kalite Garantisi</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="mb-4">Benzer Ürünler</h3>
+            <div class="row">
+                {% for related_product in products|slice:":3" %} {% if related_product.id != product.id %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="product-image-container">
+                            {% if related_product.images.white %}
+                            <img src="{{ related_product.images.white }}" class="card-img-top product-image" alt="{{ related_product.name }}"> {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">{{ related_product.name }}</h6>
+                            <div class="product-meta">
+                                <span class="badge bg-success me-2">
+                                    <i class="fas fa-star me-1"></i>{{ related_product.popularity_score|floatformat:2 }}
+                                </span>
+                                <span class="badge bg-info">
+                                    <i class="fas fa-weight-hanging me-1"></i>{{ related_product.weight }}g
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="{% url 'product_detail' related_product.id %}" class="btn btn-outline-primary btn-sm w-100">
+                                Detayları Görüntüle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %} {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+    function changeImage(imageUrl, color) {
+        document.getElementById('mainImage').src = imageUrl;
+
+        // Update active color button
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+
+    // Initialize with first color
+    document.addEventListener('DOMContentLoaded', function() {
+        const firstColorBtn = document.querySelector('.color-btn');
+        if (firstColorBtn) {
+            firstColorBtn.classList.add('active');
+        }
+    });
+</script>
+{% endblock %}

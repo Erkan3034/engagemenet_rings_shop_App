@@ -1,0 +1,356 @@
+/* Custom CSS for Engagement Rings Application */
+
+
+/* Hero Section */
+
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-icon {
+    font-size: 8rem;
+    opacity: 0.3;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+
+/* Stats Section */
+
+.stat-item {
+    padding: 2rem 1rem;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+
+/* Product Cards */
+
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1;
+}
+
+.no-image-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    color: #6c757d;
+    font-size: 3rem;
+}
+
+
+/* Product Meta */
+
+.product-meta {
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    margin-bottom: 0.5rem;
+}
+
+
+/* Color Dots */
+
+.color-dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-white {
+    background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+}
+
+.color-yellow {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+}
+
+.color-rose {
+    background: linear-gradient(45deg, #e91e63, #f06292);
+}
+
+
+/* Product Gallery */
+
+.product-gallery {
+    position: sticky;
+    top: 20px;
+}
+
+.main-image-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.color-options {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.color-btn {
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.color-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.color-btn.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+
+/* Product Info */
+
+.product-title {
+    color: #333;
+    font-weight: 700;
+}
+
+.product-description {
+    line-height: 1.6;
+}
+
+.product-features ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.product-features ul li:last-child {
+    border-bottom: none;
+}
+
+
+/* Features Section */
+
+.feature-item {
+    padding: 2rem 1rem;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+
+/* Section Titles */
+
+.section-title {
+    color: #333;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+
+/* Breadcrumb */
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: ">";
+    color: #6c757d;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 40vh;
+        text-align: center;
+    }
+    .hero-icon {
+        font-size: 4rem;
+    }
+    .stat-item {
+        padding: 1rem 0.5rem;
+    }
+    .stat-icon {
+        font-size: 2rem;
+    }
+    .stat-number {
+        font-size: 2rem;
+    }
+    .product-image-container {
+        height: 200px;
+    }
+    .color-options {
+        padding: 1rem;
+    }
+    .color-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Loading Animation */
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Custom Scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* Utility Classes */
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* Hover Effects */
+
+.hover-lift {
+    transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+
+/* Card Shadows */
+
+.shadow-custom {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-custom:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
