@@ -81,24 +81,28 @@
     }
     
     .product-title {
-        font-family: 'Montserrat', Arial, sans-serif;
-        font-size: 1.1rem;
-        font-weight: 500;
-        margin-bottom: 0.2rem;
+        font-family: 'Montserrat'; !important;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
         color: #222;
+        text-align: center;
     }
     
     .product-price {
-        font-size: 1rem;
-        font-family: 'Montserrat', Regular, sans-serif;
+        font-family: 'Montserrat'; !important;
+        font-size: 14px;
+        font-weight: normal;
         color: #222;
-        margin-bottom: 0.7rem;
+        margin-bottom: 8px;
+        text-align: center;
     }
     
     .color-dots {
         display: flex;
         gap: 0.5rem;
-        margin-bottom: 0.2rem;
+        margin-bottom: 4px;
+        justify-content: center;
     }
     
     .color-dot {
@@ -126,15 +130,17 @@
     }
     
     .color-dot.active {
-        border: 2.5px solid #E6CA97;
+        border: 2px solid #222;
     }
     
     .color-label {
-        font-size: 0.95rem;
-        color: #B49B5A;
-        margin-bottom: 0.5rem;
-        margin-left: 2px;
-        font-family: 'Avenir', 'Montserrat', Arial, sans-serif;
+        font-family: 'Montserrat'; !important;
+        font-size: 15px;
+        font-weight: 400;
+        color: #222;
+        margin-top: 4px;
+        margin-bottom: 6px;
+        text-align: center;
     }
     
     .star-rating {
@@ -142,11 +148,12 @@
         align-items: center;
         gap: 0.2rem;
         margin-bottom: 0.2rem;
+        justify-content: center;
     }
     
     .star {
         color: #E6CA97;
-        font-size: 1.1rem;
+        font-size: 18px;
     }
     
     .star.empty {
@@ -154,10 +161,11 @@
     }
     
     .rating-value {
-        font-size: 0.98rem;
-        color: #888;
-        margin-left: 0.4rem;
         font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        color: #222;
+        margin-left: 4px;
     }
     
     @media (max-width: 1200px) {
@@ -217,9 +225,8 @@
             </div>
             <div class="color-label">Yellow Gold</div>
             <div class="product-popularity">
-            <!-- product.popularity_score for -->
                 <span class="star-rating" data-score="{{ product.popularity_score|mul:5|floatformat:1 }}"></span>
-                <span class="popularity-score">{{ product.popularity_score|mul:5|floatformat:1 }}/5</span>
+                <span class="rating-value">{{ product.popularity_score|mul:5|floatformat:1 }}/5</span>
             </div>
         </div>
         {% endfor %}
@@ -240,9 +247,15 @@
 {% endblock %} {% block extra_js %}
 <script src="{% static 'js/main.js' %}"></script>
 <script>
-    // Font fallback for Avenir
-    const font = new FontFace('Avenir', 'url(/static/fonts/avenir/Avenir-Book.ttf)'); // Avenir-Book.ttf
-    font.load().then(function(loadedFont) { 
+    // Font loading for Avenir
+    const avenirBook = new FontFace('Avenir Book', 'url(/static/fonts/avenir/Avenir-Book.ttf)');
+    const avenirRegular = new FontFace('Avenir', 'url(/static/fonts/avenir/Avenir-Roman.ttf)');
+    
+    avenirBook.load().then(function(loadedFont) { 
+        document.fonts.add(loadedFont);
+    });
+    
+    avenirRegular.load().then(function(loadedFont) { 
         document.fonts.add(loadedFont);
     });
 </script>

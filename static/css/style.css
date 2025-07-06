@@ -206,8 +206,12 @@
 /* Product Info */
 
 .product-title {
-    color: #333;
-    font-weight: 700;
+    font-family: 'Montserrat';
+    font-size: 15px !important;
+    font-weight: normal !important;
+    color: #222 !important;
+    margin-bottom: 4px !important;
+    text-align: center !important;
 }
 
 .product-description {
@@ -379,8 +383,12 @@
 /* Price Styling */
 
 .product-price {
-    text-align: center;
-    margin: 10px 0;
+    font-family: 'Montserrat';
+    font-size: 15px !important;
+    font-weight: regular !important;
+    color: #020101 !important;
+    margin-bottom: 8px !important;
+    text-align: center !important;
 }
 
 .dynamic-price {
@@ -489,12 +497,13 @@
 }
 
 .color-label {
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 15px;
-    color: #222;
-    margin-top: 2px;
-    margin-bottom: 8px;
-    text-align: left;
+    font-family: 'Montserrat', Arial, sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    color: #222 !important;
+    margin-top: 4px !important;
+    margin-bottom: 6px !important;
+    text-align: center !important;
 }
 
 
@@ -521,58 +530,9 @@
 
 .popularity-score {
     font-family: 'Montserrat', Arial, sans-serif !important;
-    font-size: 14px !important;
-    color: #222 !important;
+    font-size: 15px !important;
     font-weight: 500 !important;
+    color: #222 !important;
     vertical-align: middle !important;
-}
-
-
-/* Product Title & Price */
-
-.product-title {
-    font-family: 'Avenir Book', Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 2px;
-}
-
-.product-price {
-    font-family: 'Avenir Book', Arial, sans-serif;
-    font-size: 12px;
-    color: #222;
-    margin-bottom: 4px;
-}
-
-.star,
-.star.filled,
-.star.half {
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 22px !important;
-    color: #D9D9D9 !important;
-    margin-right: 2px;
-    display: inline-block;
-    position: relative;
-    line-height: 1;
-    vertical-align: middle;
-}
-
-.star.filled {
-    color: #E6CA97 !important;
-}
-
-.star.half {
-    position: relative !important;
-    color: #D9D9D9 !important;
-}
-
-.star.half:before {
-    content: '★' !important;
-    position: absolute !important;
-    left: 0 !important;
-    width: 50% !important;
-    overflow: hidden !important;
-    color: #E6CA97 !important;
-    z-index: 1 !important;
+    margin-left: 4px !important;
 }
