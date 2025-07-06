@@ -29,7 +29,9 @@ class Product(models.Model):
         """Calculate dynamic price based on current gold price"""
         # Simple formula: (popularity_score + 1) * weight * base_gold_price
         base_gold_price = Decimal('65.00')  # Base gold price per gram
-        return (self.popularity_score + 1) * self.weight * base_gold_price
+        # Convert popularity_score to Decimal for calculation
+        popularity_decimal = Decimal(str(self.popularity_score))
+        return (popularity_decimal + Decimal('1')) * self.weight * base_gold_price
 
     def get_formatted_price(self):
         """Get formatted price string"""

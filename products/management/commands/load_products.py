@@ -1,65 +1,61 @@
-from django.core.management.base import BaseCommand
-from products.models import Product
 import json
 import os
+from django.core.management.base import BaseCommand
+from products.models import Product
+from decimal import Decimal
 
 class Command(BaseCommand):
-    help = 'Load products from JSON file with dynamic pricing'
+    help = 'Load engagement rings from JSON file'
 
     def handle(self, *args, **options):
-        # Path to the products.json file (relative to project root)
-        json_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'products.json')
+        # Clear existing products
+        Product.objects.all().delete()
+        self.stdout.write(self.style.SUCCESS('Cleared existing products'))
+
+        # Get the JSON file path
+        json_file = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'products.json')
         
         try:
-            with open(json_file_path, 'r', encoding='utf-8') as file:
+            with open(json_file, 'r', encoding='utf-8') as file:
                 products_data = json.load(file)
-            
-            created_count = 0
-            updated_count = 0
+                
+            self.stdout.write(f'Found {len(products_data)} products in JSON file')
             
             for product_data in products_data:
-                # Check if product already exists
-                product, created = Product.objects.get_or_create(
-                    name=product_data['name'],
-                    defaults={
-                        'popularity_score': product_data['popularityScore'],
-                        'weight': product_data['weight'],
-                        'images': product_data['images']
-                    }
-                )
-                
-                if created:
-                    created_count += 1
-                    self.stdout.write(
-                        self.style.SUCCESS(f'Created product: {product.name} - Price: {product.get_formatted_price()}')
+                try:
+                    # Create the product using the CDN image URLs directly
+                    product = Product.objects.create(
+                        name=product_data['name'],
+                        weight=Decimal(str(product_data['weight'])),
+                        popularity_score=Decimal(str(product_data['popularityScore'])),
+                        images={
+                            'yellow': product_data['images']['yellow'],
+                            'white': product_data['images']['white'],
+                            'rose': product_data['images']['rose']
+                        }
                     )
-                else:
-                    # Update existing product
-                    product.popularity_score = product_data['popularityScore']
-                    product.weight = product_data['weight']
-                    product.images = product_data['images']
-                    product.save()  # This will trigger dynamic price calculation
-                    updated_count += 1
+                    
+                    self.stdout.write(f'Created product: {product.name} - Price: ${product.get_dynamic_price():.2f}')
+                    
+                except Exception as e:
                     self.stdout.write(
-                        self.style.WARNING(f'Updated product: {product.name} - New Price: {product.get_formatted_price()}')
+                        self.style.ERROR(f'Error creating product {product_data.get("name", "Unknown")}: {str(e)}')
                     )
-            
+                    continue
+                    
             self.stdout.write(
-                self.style.SUCCESS(
-                    f'Successfully processed {len(products_data)} products. '
-                    f'Created: {created_count}, Updated: {updated_count}'
-                )
+                self.style.SUCCESS(f'Successfully loaded {Product.objects.count()} products')
             )
             
         except FileNotFoundError:
             self.stdout.write(
-                self.style.ERROR(f'Products JSON file not found at: {json_file_path}')
+                self.style.ERROR(f'JSON file not found: {json_file}')
             )
         except json.JSONDecodeError as e:
             self.stdout.write(
-                self.style.ERROR(f'Invalid JSON format: {e}')
+                self.style.ERROR(f'Error parsing JSON file: {str(e)}')
             )
         except Exception as e:
             self.stdout.write(
-                self.style.ERROR(f'Error loading products: {e}')
+                self.style.ERROR(f'Unexpected error: {str(e)}')
             ) 
