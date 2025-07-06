@@ -81,7 +81,7 @@
     }
     
     .product-title {
-        font-family: 'Avenir', 'Montserrat', Arial, sans-serif;
+        font-family: 'Montserrat', Arial, sans-serif;
         font-size: 1.1rem;
         font-weight: 500;
         margin-bottom: 0.2rem;
@@ -90,6 +90,7 @@
     
     .product-price {
         font-size: 1rem;
+        font-family: 'Montserrat', Regular, sans-serif;
         color: #222;
         margin-bottom: 0.7rem;
     }
@@ -216,21 +217,8 @@
             </div>
             <div class="color-label">Yellow Gold</div>
             <div class="product-popularity">
-                <span class="star-rating">
-                    {% with score=product.popularity_score|mul:5 %}
-                        {% for i in "12345" %}
-                            {% with star_value=forloop.counter %}
-                                {% if star_value <= score %}
-                                    <span class="star filled">&#9733;</span>
-                                {% elif star_value > score and star_value|subtract:1 < score %}
-                                    <span class="star half">&#9733;</span>
-                                {% else %}
-                                    <span class="star">&#9733;</span>
-                                {% endif %}
-                            {% endwith %}
-                        {% endfor %}
-                    {% endwith %}
-                </span>
+            <!-- product.popularity_score for -->
+                <span class="star-rating" data-score="{{ product.popularity_score|mul:5|floatformat:1 }}"></span>
                 <span class="popularity-score">{{ product.popularity_score|mul:5|floatformat:1 }}/5</span>
             </div>
         </div>

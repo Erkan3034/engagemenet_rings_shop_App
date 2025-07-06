@@ -44,3 +44,15 @@ class Product(models.Model):
         # Calculate and update the static price field
         self.price = self.calculate_dynamic_price()
         super().save(*args, **kwargs)
+
+    def get_popularity_score_out_of_5(self):
+        """Get popularity score out of 5 with 1 decimal place"""
+        return round(self.popularity_score * 5, 1)
+    
+    def get_filled_stars_count(self):
+        """Get number of filled stars (integer)"""
+        return int(self.popularity_score * 5)
+    
+    def get_empty_stars_count(self):
+        """Get number of empty stars"""
+        return 5 - self.get_filled_stars_count()

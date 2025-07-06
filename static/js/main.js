@@ -276,6 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', () => {
         updateCardsPerView();
         moveSlider(currentIndex);
+        renderStars();
     });
 
     function moveSlider(index) {
@@ -286,6 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sliderTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
         leftBtn.disabled = currentIndex === 0;
         rightBtn.disabled = currentIndex === maxIndex;
+        renderStars();
     }
 
     if (leftBtn && rightBtn) {
@@ -387,5 +389,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Star rating rendering
+    function renderStars() {
+        document.querySelectorAll('.star-rating').forEach(function(starContainer) {
+            const score = parseFloat(starContainer.getAttribute('data-score')) || 0;
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(score)) {
+                    html += '<span class="star filled">\u2605</span>';
+                } else if (i - 1 < score && score < i) {
+                    html += '<span class="star half">\u2605</span>';
+                } else {
+                    html += '<span class="star">\u2605</span>';
+                }
+            }
+            starContainer.innerHTML = html;
+        });
+        console.log('Yıldızlar render edildi!');
+    }
+
+    window.addEventListener('DOMContentLoaded', renderStars);
+
     console.log('Engagement Rings Application initialized successfully!');
+
+    document.querySelectorAll('.star-rating').forEach(function(starContainer) {
+        const score = parseFloat(starContainer.getAttribute('data-score')) || 0;
+        let html = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(score)) {
+                html += '<span class="star filled">\u2605</span>';
+            } else if (i - 1 < score && score < i) {
+                html += '<span class="star half">\u2605</span>';
+            } else {
+                html += '<span class="star">\u2605</span>';
+            }
+        }
+        starContainer.innerHTML = html;
+    });
+    console.log('YILDIZ TEST: render edildi!');
 });
