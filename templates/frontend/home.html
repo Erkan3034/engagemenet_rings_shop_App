@@ -1,49 +1,388 @@
-{% extends 'base.html' %} {% block title %}Ana Sayfa - Engagement Rings Collection{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Engagement Rings Collection - Luxury Jewelry{% endblock %} {% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+    /* Typography */
+    
+    .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        font-weight: 300;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #2c2c2c;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 2.5rem;
+        max-width: 500px;
+    }
+    
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: #2c2c2c;
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 1px;
+        background: #d4af37;
+    }
+    /* Hero Section */
+    
+    .hero-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero-image {
+        position: absolute;
+        right: -10%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50%;
+        height: auto;
+        opacity: 0.1;
+        z-index: 1;
+    }
+    
+    .cta-button {
+        background: #2c2c2c;
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        border-radius: 0;
+    }
+    
+    .cta-button:hover {
+        background: #d4af37;
+        color: #2c2c2c;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    /* Featured Products */
+    
+    .featured-section {
+        padding: 100px 0;
+        background: #ffffff;
+    }
+    
+    .product-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        margin-top: 60px;
+    }
+    
+    .showcase-item {
+        text-align: center;
+        padding: 30px;
+        background: #ffffff;
+        border: 1px solid #f0f0f0;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .showcase-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-color: #d4af37;
+    }
+    
+    .showcase-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .showcase-item:hover::before {
+        left: 100%;
+    }
+    
+    .showcase-image {
+        width: 100%;
+        height: 250px;
+        object-fit: contain;
+        margin-bottom: 25px;
+        background: #fafafa;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .showcase-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: #2c2c2c;
+        margin-bottom: 10px;
+    }
+    
+    .showcase-price {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #d4af37;
+        margin-bottom: 15px;
+    }
+    
+    .showcase-colors {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .color-dot-mini {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .color-dot-mini.yellow {
+        background: #E6CA97;
+    }
+    
+    .color-dot-mini.white {
+        background: #D9D9D9;
+    }
+    
+    .color-dot-mini.rose {
+        background: #E1A4A9;
+    }
+    
+    .add-to-cart-btn {
+        background: #2c2c2c;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-radius: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .add-to-cart-btn:hover {
+        background: #d4af37;
+        color: #2c2c2c;
+        transform: translateY(-2px);
+    }
+    /* About Section */
+    
+    .about-section {
+        padding: 100px 0;
+        background: #f8f9fa;
+    }
+    
+    .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .about-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 1.8;
+        color: #666;
+        margin-bottom: 40px;
+    }
+    /* Values Section */
+    
+    .values-section {
+        padding: 100px 0;
+        background: #ffffff;
+    }
+    
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 50px;
+        margin-top: 60px;
+    }
+    
+    .value-item {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .value-icon {
+        width: 60px;
+        height: 60px;
+        background: #f8f9fa;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        font-size: 1.5rem;
+        color: #d4af37;
+        border: 1px solid #f0f0f0;
+    }
+    
+    .value-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #2c2c2c;
+        margin-bottom: 15px;
+    }
+    
+    .value-description {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.6;
+        color: #666;
+    }
+    /* Newsletter Section */
+    
+    .newsletter-section {
+        padding: 80px 0;
+        background: #2c2c2c;
+        color: white;
+        text-align: center;
+    }
+    
+    .newsletter-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: 15px;
+    }
+    
+    .newsletter-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        font-weight: 300;
+        color: #ccc;
+        margin-bottom: 40px;
+    }
+    
+    .newsletter-form {
+        max-width: 400px;
+        margin: 0 auto;
+        display: flex;
+        gap: 0;
+    }
+    
+    .newsletter-input {
+        flex: 1;
+        padding: 15px 20px;
+        border: 1px solid #555;
+        background: transparent;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        outline: none;
+    }
+    
+    .newsletter-input::placeholder {
+        color: #999;
+    }
+    
+    .newsletter-button {
+        padding: 15px 30px;
+        background: #d4af37;
+        color: #2c2c2c;
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .newsletter-button:hover {
+        background: #f0c040;
+    }
+    /* Responsive Design */
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+        .section-title {
+            font-size: 2rem;
+        }
+        .product-showcase {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        .values-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        .newsletter-form {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %} {% block content %}
 <!-- Hero Section -->
-<section class="hero-section bg-gradient-primary text-white py-5">
+<section class="hero-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4">
-                    <i class="fas fa-gem me-3"></i> En Güzel Nişan Yüzükleri
-                </h1>
-                <p class="lead mb-4">
-                    Özel anlarınız için seçtiğimiz en güzel nişan yüzükleri koleksiyonu. Her yüzük, aşkınızın benzersiz hikayesini anlatır.
-                </p>
-                <a href="{% url 'products_list' %}" class="btn btn-light btn-lg">
-                    <i class="fas fa-search me-2"></i>Koleksiyonu Keşfet
-                </a>
-            </div>
-            <div class="col-lg-6 text-center">
-                <i class="fas fa-gem hero-icon"></i>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Stats Section -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div class="stat-item">
-                    <i class="fas fa-gem stat-icon text-primary"></i>
-                    <h3 class="stat-number">{{ total_products }}</h3>
-                    <p class="stat-label">Toplam Ürün</p>
+                <div class="hero-content">
+                    <h1 class="hero-title">Timeless Elegance<br>Crafted for Love</h1>
+                    <p class="hero-subtitle">
+                        Discover our exquisite collection of engagement rings, where each piece tells a unique story of love, commitment, and timeless beauty.
+                    </p>
+                    <a href="{% url 'products_list' %}" class="cta-button">Explore Collection</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="stat-item">
-                    <i class="fas fa-star stat-icon text-warning"></i>
-                    <h3 class="stat-number">8</h3>
-                    <p class="stat-label">Farklı Model</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-item">
-                    <i class="fas fa-palette stat-icon text-success"></i>
-                    <h3 class="stat-number">3</h3>
-                    <p class="stat-label">Renk Seçeneği</p>
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <i class="fas fa-gem" style="font-size: 20rem; color: #f0f0f0;"></i>
                 </div>
             </div>
         </div>
@@ -51,92 +390,108 @@
 </section>
 
 <!-- Featured Products -->
-<section class="py-5">
+<section class="featured-section">
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-12 text-center">
-                <h2 class="section-title">Öne Çıkan Ürünler</h2>
-                <p class="text-muted">En popüler nişan yüzüklerimizi keşfedin</p>
-            </div>
-        </div>
-
-        <div class="row">
-            {% for product in products|slice:":6" %}
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card product-card h-100 shadow-sm">
-                    <div class="product-image-container">
-                        {% if product.images.white %}
-                        <img src="{{ product.images.white }}" class="card-img-top product-image" alt="{{ product.name }}"> {% else %}
-                        <div class="no-image-placeholder">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        {% endif %}
-                        <div class="product-overlay">
-                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye me-1"></i>Detaylar
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <div class="product-meta">
-                            <span class="badge bg-success me-2">
-                                <i class="fas fa-star me-1"></i>{{ product.popularity_score|floatformat:2 }}
-                            </span>
-                            <span class="badge bg-info">
-                                <i class="fas fa-weight-hanging me-1"></i>{{ product.weight }}g
-                            </span>
-                        </div>
-                        <div class="product-colors mt-2">
-                            {% for color in product.get_available_colors %}
-                            <span class="color-dot color-{{ color }}" title="{{ color|title }}"></span> {% endfor %}
-                        </div>
-                    </div>
+        <h2 class="section-title">Featured Collection</h2>
+        <div class="product-showcase">
+            {% for product in products|slice:":3" %}
+            <div class="showcase-item">
+                <img src="{{ product.images.yellow }}" alt="{{ product.name }}" class="showcase-image">
+                <h3 class="showcase-title">{{ product.name }}</h3>
+                <div class="showcase-price">{{ product.get_formatted_price }}</div>
+                <div class="showcase-colors">
+                    {% for color in product.get_available_colors %}
+                    <div class="color-dot-mini {{ color }}"></div>
+                    {% endfor %}
                 </div>
-            </div>
-            {% empty %}
-            <div class="col-12 text-center">
-                <p class="text-muted">Henüz ürün bulunmamaktadır.</p>
+                <div class="rating">
+                    <i class="fas fa-star" style="color: #d4af37; font-size: 0.9rem;"></i>
+                    <i class="fas fa-star" style="color: #d4af37; font-size: 0.9rem;"></i>
+                    <i class="fas fa-star" style="color: #d4af37; font-size: 0.9rem;"></i>
+                    <i class="fas fa-star" style="color: #d4af37; font-size: 0.9rem;"></i>
+                    <i class="far fa-star" style="color: #ddd; font-size: 0.9rem;"></i>
+                </div>
             </div>
             {% endfor %}
         </div>
-
-        <div class="row mt-4">
-            <div class="col-12 text-center">
-                <a href="{% url 'products_list' %}" class="btn btn-outline-primary btn-lg">
-                    <i class="fas fa-list me-2"></i>Tüm Ürünleri Görüntüle
-                </a>
-            </div>
+        <div class="text-center mt-5">
+            <a href="{% url 'products_list' %}" class="cta-button">View All Rings</a>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-5 bg-light">
+<!-- About Section -->
+<section class="about-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 text-center mb-4">
-                <div class="feature-item">
-                    <i class="fas fa-shipping-fast feature-icon text-primary"></i>
-                    <h4>Hızlı Teslimat</h4>
-                    <p>Güvenli ve hızlı teslimat ile yüzüğünüzü kapınıza getiriyoruz.</p>
+        <div class="about-content">
+            <h2 class="section-title">Our Story</h2>
+            <p class="about-text">
+                For over a decade, we have been crafting exceptional engagement rings that celebrate love in all its forms. Each piece in our collection is meticulously designed and crafted by skilled artisans who understand that an engagement ring is more than just
+                jewelry—it's a symbol of your unique love story.
+            </p>
+            <p class="about-text">
+                From classic solitaires to contemporary designs, our rings feature the finest diamonds and precious metals, ensuring that your symbol of love will be cherished for generations to come.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-gem"></i>
                 </div>
+                <h3 class="value-title">Premium Quality</h3>
+                <p class="value-description">
+                    Each ring is crafted with the finest materials and attention to detail, ensuring lasting beauty and durability.
+                </p>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt feature-icon text-success"></i>
-                    <h4>Kalite Garantisi</h4>
-                    <p>Tüm ürünlerimiz kalite standartlarına uygun olarak üretilmiştir.</p>
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-heart"></i>
                 </div>
+                <h3 class="value-title">Personalized Service</h3>
+                <p class="value-description">
+                    Our expert consultants work with you to find or create the perfect ring that reflects your unique love story.
+                </p>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <div class="feature-item">
-                    <i class="fas fa-headset feature-icon text-info"></i>
-                    <h4>7/24 Destek</h4>
-                    <p>Müşteri hizmetlerimiz her zaman yanınızda.</p>
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
+                <h3 class="value-title">Lifetime Guarantee</h3>
+                <p class="value-description">
+                    We stand behind our craftsmanship with a comprehensive lifetime guarantee on all our engagement rings.
+                </p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3 class="value-title">Secure Delivery</h3>
+                <p class="value-description">
+                    Your precious ring is delivered safely and securely, with full insurance and tracking.
+                </p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container">
+        <h2 class="newsletter-title">Stay Connected</h2>
+        <p class="newsletter-subtitle">Be the first to know about new collections and exclusive offers</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+    </div>
+</section>
+
+
 {% endblock %}

@@ -3,8 +3,8 @@ from .models import Product
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'popularity_score', 'weight', 'created_at', 'updated_at']
-    list_filter = ['created_at', 'updated_at']
+    list_display = ['name', 'weight', 'popularity_score', 'get_formatted_price', 'created_at']
+    list_filter = ['created_at', 'popularity_score']
     search_fields = ['name']
     readonly_fields = ['created_at', 'updated_at']
     ordering = ['-popularity_score']
@@ -26,3 +26,5 @@ class ProductAdmin(admin.ModelAdmin):
     def get_available_colors(self, obj):
         return ', '.join(obj.get_available_colors())
     get_available_colors.short_description = 'Available Colors'
+
+

@@ -1,40 +1,235 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Engagement Rings Collection{% endblock %}</title>
+    <title>{% block title %}Engagement Rings Collection - Luxury Jewelry{% endblock %}</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        /* Navigation Styles */
+        
+        .navbar-luxury {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-luxury.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand-luxury {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #2c2c2c !important;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-brand-luxury:hover {
+            color: #d4af37 !important;
+        }
+        
+        .navbar-nav-luxury .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #2c2c2c !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1.5rem !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .navbar-nav-luxury .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-nav-luxury .nav-link:hover::after,
+        .navbar-nav-luxury .nav-link.active::after {
+            width: 60%;
+        }
+        
+        .navbar-nav-luxury .nav-link:hover {
+            color: #d4af37 !important;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #d4af37;
+            color: #2c2c2c;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        /* Footer Styles */
+        
+        .footer-luxury {
+            background: #2c2c2c;
+            color: #ccc;
+            padding: 60px 0 30px;
+            margin-top: 15px;
+        }
+        
+        .footer-section {
+            margin-bottom: 40px;
+        }
+        
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .footer-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #d4af37;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #999;
+            margin: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #d4af37;
+            color: #2c2c2c;
+            transform: translateY(-2px);
+        }
+        /* Mobile Responsive */
+        
+        @media (max-width: 768px) {
+            .navbar-brand-luxury {
+                font-size: 1.5rem;
+            }
+            .navbar-nav-luxury .nav-link {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.85rem;
+            }
+            .footer-section {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-luxury fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">
+            <a class="navbar-brand-luxury" href="{% url 'home' %}">
                 <i class="fas fa-gem me-2"></i>Engagement Rings
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border: none; box-shadow: none;">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav navbar-nav-luxury ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Ana Sayfa</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'products_list' %}">Ürünler</a>
+                        <a class="nav-link" href="{% url 'products_list' %}">Collection</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/api/products/">API</a>
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -42,21 +237,75 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container-fluid p-0">
+    <main style="padding-top: 80px;">
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
+    <footer class="footer-luxury">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h5><i class="fas fa-gem me-2"></i>Engagement Rings Collection</h5>
-                    <p class="mb-0">En güzel nişan yüzükleri koleksiyonu</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-section">
+                        <h3 class="footer-title">Engagement Rings</h3>
+                        <p class="footer-text">
+                            Crafting timeless symbols of love since 2010. Each ring tells a unique story of commitment, passion, and eternal beauty.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-0">&copy; 2025 Engagement Rings. Tüm hakları saklıdır.</p>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">Collection</h4>
+                        <ul class="footer-links">
+                            <li><a href="{% url 'products_list' %}">All Rings</a></li>
+                            <li><a href="{% url 'products_list' %}?color=yellow">Yellow Gold</a></li>
+                            <li><a href="{% url 'products_list' %}?color=white">White Gold</a></li>
+                            <li><a href="{% url 'products_list' %}?color=rose">Rose Gold</a></li>
+                        </ul>
+                    </div>
                 </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">Services</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Custom Design</a></li>
+                            <li><a href="#">Ring Sizing</a></li>
+                            <li><a href="#">Cleaning & Care</a></li>
+                            <li><a href="#">Warranty</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Size Guide</a></li>
+                            <li><a href="#">Shipping Info</a></li>
+                            <li><a href="#">Returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">Company</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Story</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Engagement Rings Collection. All rights reserved. | Crafted with love for your special moments.</p>
             </div>
         </div>
     </footer>
@@ -65,6 +314,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-luxury');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link
+        const currentLocation = location.pathname;
+        const menuItems = document.querySelectorAll('.navbar-nav-luxury .nav-link');
+        menuItems.forEach(item => {
+            if (item.getAttribute('href') === currentLocation) {
+                item.classList.add('active');
+            }
+        });
+    </script>
 
     {% block extra_js %}{% endblock %}
 </body>
