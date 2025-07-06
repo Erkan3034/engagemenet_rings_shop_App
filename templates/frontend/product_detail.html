@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% block title %}{{ product.name }} - Engagement Rings Collection{% endblock %} {% block content %}
+{% extends 'base.html' %} 
+{% block title %}
+{{ product.name }} - Engagement Rings Collection{% endblock %} 
+{% block content %} 
+{% load static %} 
+{% load frontend_extras %}
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="bg-light py-2">
     <div class="container">
@@ -24,7 +29,7 @@
                     <h6 class="mb-3">Renk Seçenekleri:</h6>
                     <div class="d-flex gap-2">
                         {% for color in available_colors %}
-                        <button class="btn btn-outline-primary color-btn" data-color="{{ color }}" data-image="{{ product.images|get_item:color }}" onclick="changeImage('{{ product.images|get_item:color }}', '{{ color }}')">
+                        <button class="btn btn-outline-primary color-btn" data-color="{{ color }}" data-image="{{ product.images|dict_get:color }}" onclick="changeImage('{{ product.images|dict_get:color }}', '{{ color }}')">
                             <span class="color-dot color-{{ color }} me-2"></span>
                             {{ color|title }}
                         </button> {% endfor %}

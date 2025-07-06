@@ -1,4 +1,7 @@
-{% load static %} {% extends 'base.html' %} {% block title %}Product List{% endblock %} {% block extra_css %}
+{% extends 'base.html' %} 
+{% load static %} 
+ {% block title %}Product List{% endblock %} 
+ {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 <style>
     .product-list-title {
@@ -224,8 +227,8 @@
 <script src="{% static 'js/main.js' %}"></script>
 <script>
     // Font fallback for Avenir
-    const font = new FontFace('Avenir', 'url(/static/fonts/avenir/Avenir-Book.ttf)');
-    font.load().then(function(loadedFont) {
+    const font = new FontFace('Avenir', 'url(/static/fonts/avenir/Avenir-Book.ttf)'); // Avenir-Book.ttf
+    font.load().then(function(loadedFont) { 
         document.fonts.add(loadedFont);
     });
 </script>
