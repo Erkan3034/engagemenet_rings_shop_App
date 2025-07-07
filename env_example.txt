@@ -9,7 +9,7 @@ ALLOWED_HOSTS=your-domain.onrender.com,localhost,127.0.0.1
 # Superuser creation (optional)
 DJANGO_SUPERUSER_USERNAME=admin
 DJANGO_SUPERUSER_EMAIL=admin@example.com
-DJANGO_SUPERUSER_PASSWORD=your-secure-password
+DJANGO_SUPERUSER_PASSWORD=secure-password
 
 # Logging
 DJANGO_LOG_LEVEL=INFO
