@@ -100,3 +100,13 @@ def api_products(request):
             'available_colors': product.get_available_colors(),
         })
     return JsonResponse({'products': data})
+
+def about(request):
+    """About page view"""
+    context = {}
+    return render(request, 'frontend/about.html', context)
+
+def contact(request):
+    """Contact page view"""
+    context = {}
+    return render(request, 'frontend/contact.html', context)
