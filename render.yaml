@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: engagement-rings-app
+    runtime: python3
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn engagement_rings_backend.wsgi:application"
+    plan: free
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@rings.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
+    
+databases:
+  - name: engagement-rings-db
+    databaseName: engagement_rings
+    user: engagement_rings_user
+    plan: free 

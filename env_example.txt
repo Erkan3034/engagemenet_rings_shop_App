@@ -1,0 +1,19 @@
+# Django Settings
+SECRET_KEY=your-super-secret-key-here-generate-a-new-one
+DEBUG=False
+ALLOWED_HOSTS=your-domain.onrender.com,localhost,127.0.0.1
+
+# Database (Render will provide this automatically)
+# DATABASE_URL=postgresql://user:password@host:port/database
+
+# Superuser creation (optional)
+DJANGO_SUPERUSER_USERNAME=admin
+DJANGO_SUPERUSER_EMAIL=admin@example.com
+DJANGO_SUPERUSER_PASSWORD=your-secure-password
+
+# Logging
+DJANGO_LOG_LEVEL=INFO
+
+# For Render deployment, these will be set automatically:
+# RENDER_EXTERNAL_HOSTNAME=your-app-name.onrender.com
+# RENDER=true 

@@ -440,9 +440,9 @@
 <!-- Contact Hero Section -->
 <section class="contact-hero">
     <div class="container">
-        <h1 class="contact-title">İletişim</h1>
+        <h1 class="contact-title">Contact Us</h1>
         <p class="contact-subtitle">
-            Hayalinizdeki yüzükle ilgili sorularınız için bizimle iletişime geçin. Uzman ekibimiz size en uygun çözümleri sunmak için hazır.
+            Contact us for questions about your dream ring. Our expert team is ready to offer you the most suitable solutions.
         </p>
     </div>
 </section>
@@ -455,9 +455,9 @@
                 <div class="info-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
-                <h4 class="info-title">Adresimiz</h4>
+                <h4 class="info-title">Our Address</h4>
                 <div class="info-details">
-                    Kapalıçarşı Kuyumcular Çarşısı<br> No: 45-47 Eminönü<br> İstanbul, Türkiye
+                    Grand Bazaar Jewelry Market<br> No: 12-05 Test Street<br> Istanbul, Turkey
                 </div>
             </div>
 
@@ -465,11 +465,11 @@
                 <div class="info-icon">
                     <i class="fas fa-phone"></i>
                 </div>
-                <h4 class="info-title">Telefon</h4>
+                <h4 class="info-title">Phone</h4>
                 <div class="info-details">
                     <a href="tel:+902125550123">+90 (212) 555 01 23</a><br>
                     <a href="tel:+902125550124">+90 (212) 555 01 24</a><br>
-                    <small>7/24 Müşteri Hattı</small>
+                    <small>24/7 Customer Service</small>
                 </div>
             </div>
 
@@ -477,11 +477,11 @@
                 <div class="info-icon">
                     <i class="fas fa-envelope"></i>
                 </div>
-                <h4 class="info-title">E-posta</h4>
+                <h4 class="info-title">Email</h4>
                 <div class="info-details">
-                    <a href="mailto:info@engagementrings.com">info@engagementrings.com</a><br>
-                    <a href="mailto:sales@engagementrings.com">sales@engagementrings.com</a><br>
-                    <small>24 saat içinde yanıt</small>
+                    <a href="mailto:erkandenem@gmail.com">info@rings.com</a><br>
+                    <a href="mailto:erkandenem@gmail.com">sales@rings.com</a><br>
+                    <small>Reply within 24 hours</small>
                 </div>
             </div>
 
@@ -489,11 +489,11 @@
                 <div class="info-icon">
                     <i class="fas fa-comments"></i>
                 </div>
-                <h4 class="info-title">Sosyal Medya</h4>
+                <h4 class="info-title">Social Media</h4>
                 <div class="info-details">
-                    <a href="#" target="_blank">@engagementring_official</a><br>
-                    <a href="#" target="_blank">facebook.com/engagementrings</a><br>
-                    <small>Son haberler ve özel fırsatlar</small>
+                    <a href="#" target="_blank">@rings_official</a><br>
+                    <a href="#" target="_blank">facebook.com/rings</a><br>
+                    <small>Latest news and special offers</small>
                 </div>
             </div>
         </div>
@@ -503,64 +503,64 @@
 <!-- Contact Form Section -->
 <section class="contact-form-section">
     <div class="container">
-        <h2 class="section-title">Bizimle İletişime Geçin</h2>
+        <h2 class="section-title">Get In Touch With Us</h2>
 
         <div class="contact-form-container">
             <div class="form-text">
-                <h3>Size Nasıl Yardımcı Olabiliriz?</h3>
+                <h3>How Can We Help You?</h3>
                 <p>
-                    Hayalinizdeki nişan yüzüğü için bizimle iletişime geçin. Uzman ekibimiz size özel tasarım, fiyat bilgisi ve satış sonrası hizmetler konularında detaylı bilgi verecek.
+                    Contact us for your dream engagement ring. Our expert team will provide you with detailed information about custom design, pricing, and after-sales services.
                 </p>
                 <p>
-                    Form aracılığıyla bize ulaştığınızda, en kısa sürede size geri dönüş yapacağız. Acil durumlar için direkt telefon hattımızı kullanabilirsiniz.
+                    When you reach us through the form, we will get back to you as soon as possible. For urgent matters, you can use our direct phone line.
                 </p>
 
                 <ul class="form-benefits">
-                    <li>24 saat içinde yanıt garantisi</li>
-                    <li>Ücretsiz tasarım danışmanlığı</li>
-                    <li>Kişiye özel çözüm önerileri</li>
-                    <li>Randevu planlaması</li>
-                    <li>Özel indirim fırsatları</li>
+                    <li>Response guarantee within 24 hours</li>
+                    <li>Free design consultation</li>
+                    <li>Personalized solution recommendations</li>
+                    <li>Appointment planning</li>
+                    <li>Special discount opportunities</li>
                 </ul>
             </div>
 
             <form class="contact-form" method="post" action="">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="name">Ad Soyad *</label>
+                    <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-posta *</label>
+                    <label for="email">Email *</label>
                     <input type="email" id="email" name="email" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Telefon</label>
+                    <label for="phone">Phone</label>
                     <input type="tel" id="phone" name="phone" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="subject">Konu</label>
+                    <label for="subject">Subject</label>
                     <select id="subject" name="subject" class="form-control">
-                        <option value="">Konu Seçin</option>
-                        <option value="general">Genel Bilgi</option>
-                        <option value="custom">Özel Tasarım</option>
-                        <option value="price">Fiyat Bilgisi</option>
-                        <option value="appointment">Randevu</option>
-                        <option value="service">Satış Sonrası Hizmet</option>
-                        <option value="other">Diğer</option>
+                        <option value="">Select Subject</option>
+                        <option value="general">General Information</option>
+                        <option value="custom">Custom Design</option>
+                        <option value="price">Price Information</option>
+                        <option value="appointment">Appointment</option>
+                        <option value="service">After Sales Service</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Mesajınız *</label>
-                    <textarea id="message" name="message" class="form-control textarea" placeholder="Hangi konuda yardıma ihtiyacınız var? Detayları paylaşın..." required></textarea>
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" class="form-control textarea" placeholder="What kind of help do you need? Please share the details..." required></textarea>
                 </div>
 
                 <button type="submit" class="form-submit">
-                    <i class="fas fa-paper-plane me-2"></i>Mesaj Gönder
+                    <i class="fas fa-paper-plane me-2"></i>Send Message
                 </button>
             </form>
         </div>
@@ -570,10 +570,10 @@
 <!-- Map Section -->
 <section class="map-section">
     <div class="container">
-        <h2 class="section-title">Konumumuz</h2>
+        <h2 class="section-title">Our Location</h2>
         <div class="map-container">
             <div>
-                <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #d4af37; margin-bottom: 1rem;"></i><br> Kapalıçarşı Kuyumcular Çarşısı No: 45-47<br> Eminönü, İstanbul
+                <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #d4af37; margin-bottom: 1rem;"></i><br> Grand Bazaar Jewelry Market No: 45-47<br> Eminonu, Istanbul
             </div>
         </div>
     </div>
@@ -582,56 +582,56 @@
 <!-- FAQ Section -->
 <section class="faq-section">
     <div class="container">
-        <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+        <h2 class="section-title">Frequently Asked Questions</h2>
 
         <div class="faq-container">
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    Özel tasarım yüzük ne kadar sürede hazırlanır?
+                    How long does it take to prepare a custom design ring?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    Özel tasarım yüzüklerin hazırlık süresi kompleksiteye göre değişir. Genellikle 2-4 hafta arasında teslim edilir. Acil durumlar için hızlandırılmış üretim seçeneği de mevcuttur.
+                    The preparation time for custom design rings varies depending on complexity. Usually delivered within 2-4 weeks. Expedited production option is also available for urgent situations.
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    Ürünlerinizde garanti var mı?
+                    Do your products come with warranty?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    Tüm ürünlerimizde 2 yıl uluslararası garanti bulunmaktadır. Ayrıca yaşam boyu ücretsiz temizlik ve bakım hizmeti sunuyoruz.
+                    All our products come with 2 years international warranty. We also offer lifetime free cleaning and maintenance service.
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    Ödeme seçenekleri nelerdir?
+                    What are the payment options?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    Nakit, kredi kartı, banka havalesi ve taksitli ödeme seçenekleri mevcuttur. 12 aya kadar vade imkanı sunuyoruz. Özel finansman paketleri de hazırlayabiliriz.
+                    Cash, credit card, bank transfer and installment payment options are available. We offer installment options up to 12 months. We can also prepare special financing packages.
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    İade ve değişim politikanız nasıl?
+                    What is your return and exchange policy?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    14 gün içinde iade imkanı, 30 gün içinde değişim hakkı sunuyoruz. Özel tasarım ürünlerde ise değişiklik talebinizi üretim aşamasında bildirebilirsiniz.
+                    We offer return option within 14 days and exchange right within 30 days. For custom design products, you can notify your change request during the production phase.
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFaq(this)">
-                    Sertifika belgesi veriliyor mu?
+                    Do you provide certificate documentation?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    Tüm pırlanta ve değerli taşlı ürünlerimiz uluslararası sertifika ile birlikte teslim edilir. Ürün özellikleri detaylı şekilde belgelendirilir.
+                    All our diamond and precious stone products are delivered with international certificates. Product features are documented in detail.
                 </div>
             </div>
         </div>
@@ -642,22 +642,22 @@
 <section class="hours-section">
     <div class="container">
         <div class="hours-container">
-            <h2 class="hours-title">Çalışma Saatlerimiz</h2>
+            <h2 class="hours-title">Our Working Hours</h2>
 
             <div class="hours-grid">
                 <div class="hours-item">
-                    <div class="hours-day">Pazartesi - Cumartesi</div>
+                    <div class="hours-day">Monday - Saturday</div>
                     <div class="hours-time">09:00 - 19:00</div>
                 </div>
 
                 <div class="hours-item">
-                    <div class="hours-day">Pazar</div>
+                    <div class="hours-day">Sunday</div>
                     <div class="hours-time">11:00 - 17:00</div>
                 </div>
             </div>
 
             <p style="margin-top: 2rem; color: #ccc; font-family: 'Avenir', 'Montserrat', Arial, sans-serif;">
-                Randevu almak için lütfen önceden arayın
+                Please call in advance to make an appointment
             </p>
         </div>
     </div>
@@ -692,12 +692,12 @@
 
         // Simple validation
         if (!name || !email || !message) {
-            alert('Lütfen zorunlu alanları doldurun.');
+            alert('Please fill in the required fields.');
             return;
         }
 
         // Show success message
-        alert('Mesajınız başarıyla gönderildi! En kısa sürede size geri dönüş yapacağız.');
+        alert('Your message has been sent successfully! We will get back to you as soon as possible.');
 
         // Reset form
         this.reset();
