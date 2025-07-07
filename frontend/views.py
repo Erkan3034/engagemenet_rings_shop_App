@@ -36,6 +36,8 @@ def products_list(request):
     max_popularity = request.GET.get('max_popularity')
     min_weight = request.GET.get('min_weight')
     max_weight = request.GET.get('max_weight')
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
     search = request.GET.get('search')
     color = request.GET.get('color')
     ordering = request.GET.get('ordering', '-popularity_score')
@@ -48,6 +50,10 @@ def products_list(request):
         products = products.filter(weight__gte=float(min_weight))
     if max_weight:
         products = products.filter(weight__lte=float(max_weight))
+    if min_price:
+        products = products.filter(price__gte=float(min_price))
+    if max_price:
+        products = products.filter(price__lte=float(max_price))
     if search:
         products = products.filter(name__icontains=search)
     if color:
@@ -71,6 +77,8 @@ def products_list(request):
             'max_popularity': max_popularity,
             'min_weight': min_weight,
             'max_weight': max_weight,
+            'min_price': min_price,
+            'max_price': max_price,
             'search': search,
             'color': color,
             'ordering': ordering,

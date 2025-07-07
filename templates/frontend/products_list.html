@@ -7,11 +7,200 @@
 <style>
     .product-list-title {
         font-family: 'Avenir', 'Montserrat', Arial, sans-serif;
-        font-size: 2.5rem;
+        font-size: 16px;
         font-weight: 400;
         text-align: center;
         margin: 2rem 0 1.5rem 0;
         letter-spacing: 0.01em;
+    }
+    
+    /* Filter Panel Styles */
+    .filter-panel {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto 2rem;
+        padding: 0 1rem;
+    }
+    
+    .filter-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+    }
+    
+    .filter-toggle-btn {
+        position: relative;
+        background: #d4af37;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .filter-toggle-btn:hover {
+        background: #c19b26;
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    }
+    
+    .filter-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #dc3545;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+    
+    .filter-container {
+        position: absolute;
+        top: 55px;
+        right: 0;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        min-width: 500px;
+        max-width: 600px;
+        z-index: 1000;
+        display: none;
+    }
+    
+    .filter-container.active {
+        display: block;
+        animation: filterSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes filterSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .filter-content {
+        padding: 1.5rem;
+    }
+    
+    .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .filter-group label {
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+    
+    .range-inputs {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .range-inputs input {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+    }
+    
+    .range-inputs span {
+        color: #666;
+        font-weight: 500;
+    }
+    
+    .filter-group input,
+    .filter-group select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        transition: border-color 0.3s ease;
+    }
+    
+    .filter-group input:focus,
+    .filter-group select:focus {
+        outline: none;
+        border-color: #d4af37;
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+    }
+    
+    .filter-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-apply-filters,
+    .btn-clear-filters {
+        padding: 0.7rem 1.5rem;
+        border-radius: 6px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+    }
+    
+    .btn-apply-filters {
+        background: #d4af37;
+        color: white;
+    }
+    
+    .btn-apply-filters:hover {
+        background: #c19b26;
+        transform: translateY(-1px);
+    }
+    
+    .btn-clear-filters {
+        background: #6c757d;
+        color: white;
+    }
+    
+    .btn-clear-filters:hover {
+        background: #5a6268;
+        transform: translateY(-1px);
+    }
+    
+    .results-info {
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 1rem;
     }
     
     .slider-container {
@@ -19,13 +208,16 @@
         width: 100%;
         max-width: 1400px;
         margin: 0 auto;
-        overflow: visible;
+        overflow: hidden;
+        padding: 0 60px; /* Space for buttons */
+        background-color: #fff;
     }
     
     .slider-track {
         display: flex;
         transition: transform 0.5s cubic-bezier(.4, 0, .2, 1);
         will-change: transform;
+        gap: 0; /* Remove extra gaps */
     }
     
     .slider-arrow {
@@ -35,26 +227,42 @@
         background: #fff;
         border: none;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        font-size: 1.5rem;
+        width: 50px;
+        height: 50px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-size: 1.8rem;
         color: #333;
-        z-index: 2;
+        z-index: 10;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .slider-arrow:hover {
+        background: #f5f5f5;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-50%) scale(1.1);
     }
     
     .slider-arrow:active {
         background: #eee;
+        transform: translateY(-50%) scale(0.95);
+    }
+    
+    .slider-arrow:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        transform: translateY(-50%) scale(0.9);
     }
     
     .slider-arrow.left {
-        left: -20px;
+        left: 10px;
     }
     
     .slider-arrow.right {
-        right: -20px;
+        right: 10px;
     }
     
     .product-card {
@@ -69,6 +277,24 @@
         flex-direction: column;
         align-items: flex-start;
         font-family: 'Montserrat', Arial, sans-serif;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+    
+    .product-title-link {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+    }
+    
+    .product-title-link:hover {
+        text-decoration: none;
+        color: #d4af37;
     }
     
     .product-image {
@@ -82,11 +308,11 @@
     
     .product-title {
         font-family: 'Montserrat'; !important;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 25px;
+        font-weight: 450px;
         margin-bottom: 4px;
         color: #222;
-        text-align: center;
+        text-align: left;
     }
     
     .product-price {
@@ -95,14 +321,21 @@
         font-weight: normal;
         color: #222;
         margin-bottom: 8px;
-        text-align: center;
+        text-align: left;
+    }
+    
+    .dynamic-price {
+        font-weight: normal !important;
     }
     
     .color-dots {
         display: flex;
         gap: 0.5rem;
         margin-bottom: 4px;
-        justify-content: center;
+        justify-content: flex-start;
+        margin-top: 8px;
+        position: relative;
+        z-index: 2;
     }
     
     .color-dot {
@@ -140,7 +373,9 @@
         color: #222;
         margin-top: 4px;
         margin-bottom: 6px;
-        text-align: center;
+        text-align: left;
+        position: relative;
+        z-index: 2;
     }
     
     .star-rating {
@@ -148,7 +383,7 @@
         align-items: center;
         gap: 0.2rem;
         margin-bottom: 0.2rem;
-        justify-content: center;
+        justify-content: flex-start;
     }
     
     .star {
@@ -171,6 +406,7 @@
     @media (max-width: 1200px) {
         .slider-container {
             max-width: 1000px;
+            padding: 0 50px;
         }
         .product-card {
             width: 220px;
@@ -181,42 +417,156 @@
     @media (max-width: 900px) {
         .slider-container {
             max-width: 700px;
+            padding: 0 45px;
         }
         .product-card {
             width: 180px;
             flex-basis: 180px;
+        }
+        .slider-arrow {
+            width: 45px;
+            height: 45px;
+            font-size: 1.6rem;
         }
     }
     
     @media (max-width: 700px) {
         .slider-container {
             max-width: 100vw;
+            padding: 0 40px;
         }
         .product-card {
-            width: 90vw;
-            flex-basis: 90vw;
+            width: calc(90vw - 80px);
+            flex-basis: calc(90vw - 80px);
             margin: 0 0.5rem;
         }
+        .slider-arrow {
+            width: 40px;
+            height: 40px;
+            font-size: 1.4rem;
+        }
         .slider-arrow.left {
-            left: 0;
+            left: 5px;
         }
         .slider-arrow.right {
-            right: 0;
+            right: 5px;
+        }
+        
+        .filter-container {
+            min-width: 350px;
+            max-width: 90vw;
+            right: -10px;
+        }
+        
+        .filter-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>
 {% endblock %} {% block content %}
 <div class="product-list-title">Product List</div>
+
+<!-- Filter Panel -->
+<div class="filter-panel">
+    <div class="filter-header">
+        <button class="filter-toggle-btn" onclick="toggleFilters()">
+            <span>🔍</span>
+            <span class="filter-count" id="filterCount"></span>
+        </button>
+    </div>
+    
+    <div class="filter-container" id="filterContainer">
+        <div class="filter-content" id="filterContent">
+            <form method="GET" id="filterForm">
+                <div class="filter-grid">
+                    <!-- Price Range Filter -->
+                    <div class="filter-group">
+                        <label>Price Range</label>
+                        <div class="range-inputs">
+                            <input type="number" name="min_price" placeholder="Min Price" value="{{ filters.min_price }}" step="0.01">
+                            <span>-</span>
+                            <input type="number" name="max_price" placeholder="Max Price" value="{{ filters.max_price }}" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <!-- Popularity Score Filter -->
+                    <div class="filter-group">
+                        <label>Popularity Score</label>
+                        <div class="range-inputs">
+                            <input type="number" name="min_popularity" placeholder="Min (0-1)" value="{{ filters.min_popularity }}" step="0.01" min="0" max="1">
+                            <span>-</span>
+                            <input type="number" name="max_popularity" placeholder="Max (0-1)" value="{{ filters.max_popularity }}" step="0.01" min="0" max="1">
+                        </div>
+                    </div>
+                    
+                    <!-- Weight Filter -->
+                    <div class="filter-group">
+                        <label>Weight (grams)</label>
+                        <div class="range-inputs">
+                            <input type="number" name="min_weight" placeholder="Min Weight" value="{{ filters.min_weight }}" step="0.1">
+                            <span>-</span>
+                            <input type="number" name="max_weight" placeholder="Max Weight" value="{{ filters.max_weight }}" step="0.1">
+                        </div>
+                    </div>
+                    
+                    <!-- Color Filter -->
+                    <div class="filter-group">
+                        <label>Color</label>
+                        <select name="color">
+                            <option value="">All Colors</option>
+                            <option value="yellow" {% if filters.color == 'yellow' %}selected{% endif %}>Yellow Gold</option>
+                            <option value="white" {% if filters.color == 'white' %}selected{% endif %}>White Gold</option>
+                            <option value="rose" {% if filters.color == 'rose' %}selected{% endif %}>Rose Gold</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Search Filter -->
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" name="search" placeholder="Search by name" value="{{ filters.search }}">
+                    </div>
+                    
+                    <!-- Ordering -->
+                    <div class="filter-group">
+                        <label>Sort By</label>
+                        <select name="ordering">
+                            <option value="-popularity_score" {% if filters.ordering == '-popularity_score' %}selected{% endif %}>Popularity (High to Low)</option>
+                            <option value="popularity_score" {% if filters.ordering == 'popularity_score' %}selected{% endif %}>Popularity (Low to High)</option>
+                            <option value="-price" {% if filters.ordering == '-price' %}selected{% endif %}>Price (High to Low)</option>
+                            <option value="price" {% if filters.ordering == 'price' %}selected{% endif %}>Price (Low to High)</option>
+                            <option value="name" {% if filters.ordering == 'name' %}selected{% endif %}>Name (A-Z)</option>
+                            <option value="-name" {% if filters.ordering == '-name' %}selected{% endif %}>Name (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button type="submit" class="btn-apply-filters">Apply Filters</button>
+                    <button type="button" class="btn-clear-filters" onclick="clearFilters()">Clear All</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Results Info -->
+<div class="results-info">
+    <span>{{ total_products }} products found</span>
+</div>
+
+    <button class="slider-arrow left" id="sliderLeft" aria-label="Previous">&#8249;</button>  <!-- left arrow -->
+
 <div class="slider-container">
-    <button class="slider-arrow left" id="sliderLeft" aria-label="Previous">&#8249;</button>
+
     <div class="slider-track" id="sliderTrack">
         {% for product in products %}
         <div class="product-card" data-product-id="{{ product.id }}">
             <img src="{{ product.images.yellow }}" class="product-image" data-color="yellow" alt="{{ product.name }}">
-            <div class="product-title">{{ product.name }}</div>
+            <div class="product-title">
+                <a href="{% url 'product_detail' product.id %}" class="product-title-link">{{ product.name }}</a>
+            </div>
             <div class="product-price">
                 <span class="dynamic-price">{{ product.get_formatted_price }}</span>
-
             </div>
             <div class="color-dots">
                 {% for color in product.get_available_colors %}
@@ -231,8 +581,9 @@
         </div>
         {% endfor %}
     </div>
-    <button class="slider-arrow right" id="sliderRight" aria-label="Next">&#8250;</button>
 </div>
+    <button class="slider-arrow right" id="sliderRight" aria-label="Next">&#8250;</button> <!-- right arrow -->
+
 <script>
     window.productImages = {
         {% for product in products %}
@@ -257,6 +608,73 @@
     
     avenirRegular.load().then(function(loadedFont) { 
         document.fonts.add(loadedFont);
+    });
+    
+    // Filter Panel JavaScript
+    function toggleFilters() {
+        const filterContainer = document.getElementById('filterContainer');
+        filterContainer.classList.toggle('active');
+    }
+    
+    // Close filter panel when clicking outside
+    document.addEventListener('click', function(event) {
+        const filterPanel = document.querySelector('.filter-panel');
+        const filterContainer = document.getElementById('filterContainer');
+        const filterToggle = document.querySelector('.filter-toggle-btn');
+        
+        if (!filterPanel.contains(event.target)) {
+            filterContainer.classList.remove('active');
+        }
+    });
+    
+    function clearFilters() {
+        // Clear all form inputs
+        const form = document.getElementById('filterForm');
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            if (input.type === 'number' || input.type === 'text') {
+                input.value = '';
+            } else if (input.type === 'select-one') {
+                input.selectedIndex = 0;
+            }
+        });
+        
+        // Submit the form to apply cleared filters
+        form.submit();
+    }
+    
+    // Update filter count
+    function updateFilterCount() {
+        const form = document.getElementById('filterForm');
+        const inputs = form.querySelectorAll('input[name], select[name]');
+        let activeFilters = 0;
+        
+        inputs.forEach(input => {
+            if (input.value && input.value.trim() !== '' && input.value !== '-popularity_score') {
+                activeFilters++;
+            }
+        });
+        
+        const filterCount = document.getElementById('filterCount');
+        if (activeFilters > 0) {
+            filterCount.textContent = activeFilters;
+            filterCount.style.display = 'flex';
+        } else {
+            filterCount.style.display = 'none';
+        }
+    }
+    
+    // Initialize filter count on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        updateFilterCount();
+        
+        // Update count when inputs change
+        const form = document.getElementById('filterForm');
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('input', updateFilterCount);
+            input.addEventListener('change', updateFilterCount);
+        });
     });
 </script>
 {% endblock %}

@@ -60,14 +60,50 @@
     }
     
     .hero-image {
-        position: absolute;
-        right: -10%;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        z-index: 2;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border-radius: 20px;
+        padding: 40px;
+    }
+    
+    .hero-ring-image {
+        width: 100%;
+        max-width: 450px;
         height: auto;
-        opacity: 0.1;
-        z-index: 1;
+        object-fit: contain;
+        animation: floatRing 6s ease-in-out infinite;
+        background: transparent;
+        /* Ultra aggressive clipping - only show ring center */
+        clip-path: circle(40% at center);
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25)) contrast(1.3) brightness(1.1) saturate(1.2);
+    }
+    
+    @keyframes floatRing {
+        0%,
+        100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(5deg);
+        }
+    }
+    
+    .hero-image::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: -1;
     }
     
     .cta-button {
@@ -353,6 +389,14 @@
         .section-title {
             font-size: 2rem;
         }
+        .hero-ring-image {
+            max-width: 300px;
+            margin-top: 2rem;
+        }
+        .hero-image::before {
+            width: 200px;
+            height: 200px;
+        }
         .product-showcase {
             grid-template-columns: 1fr;
             gap: 30px;
@@ -382,7 +426,9 @@
             </div>
             <div class="col-lg-6">
                 <div class="hero-image">
-                    <i class="fas fa-gem" style="font-size: 20rem; color: #f0f0f0;"></i>
+                    {% if products.0.images.yellow %}
+                    <img src="{{ products.0.images.yellow }}" alt="Engagement Ring" class="hero-ring-image"> {% else %}
+                    <img src="/static/images/ring-placeholder.jpg" alt="Engagement Ring" class="hero-ring-image"> {% endif %}
                 </div>
             </div>
         </div>

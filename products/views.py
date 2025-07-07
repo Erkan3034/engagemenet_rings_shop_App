@@ -7,8 +7,9 @@ from .models import Product
 from .serializers import ProductSerializer, ProductListSerializer
 from .services import GoldPriceService, PriceCalculator
 
-# Create your views here.
 
+
+# Filtering and searching for products
 class ProductFilter(filters.FilterSet):
     min_popularity = filters.NumberFilter(field_name="popularity_score", lookup_expr='gte')
     max_popularity = filters.NumberFilter(field_name="popularity_score", lookup_expr='lte')
@@ -22,6 +23,7 @@ class ProductFilter(filters.FilterSet):
         model = Product
         fields = ['name', 'popularity_score', 'weight', 'price']
 
+# Product viewset
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -35,6 +37,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             return ProductListSerializer
         return ProductSerializer
 
+    # Get popular products
     @action(detail=False, methods=['get'])
     def popular(self, request):
         """Get products with high popularity score"""
@@ -42,6 +45,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = self.get_serializer(popular_products, many=True)
         return Response(serializer.data)
 
+    # Get all available colors across all products
     @action(detail=False, methods=['get'])
     def colors(self, request):
         """Get all available colors across all products"""
@@ -50,6 +54,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             all_colors.update(product.get_available_colors())
         return Response({'colors': list(all_colors)})
 
+    # Get all images for a specific product
     @action(detail=True, methods=['get'])
     def images(self, request, pk=None):
         """Get all images for a specific product"""
@@ -59,6 +64,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             'images': product.images
         })
 
+    # Get current gold price per gram
     @action(detail=False, methods=['get'])
     def gold_price(self, request):
         """Get current gold price per gram"""
@@ -75,6 +81,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
                 'message': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    # Get price calculation formula and example
     @action(detail=False, methods=['get'])
     def price_formula(self, request):
         """Get price calculation formula and example"""
