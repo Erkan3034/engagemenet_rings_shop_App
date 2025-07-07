@@ -673,7 +673,7 @@ p {
 .product-price {
     font-family: 'Montserrat';
     font-size: 15px !important;
-    font-weight: regular !important;
+    font-weight: normal !important;
     color: #020101 !important;
     margin-bottom: 8px !important;
     text-align: center !important;
@@ -681,7 +681,7 @@ p {
 
 .dynamic-price {
     font-size: 1.2em;
-    font-weight: normal;
+    font-weight: normal !important;
     color: #252523;
     font-family: 'Montserrat', sans-serif;
 }
@@ -724,7 +724,7 @@ p {
     padding: 10px 15px;
     border-radius: 0;
     font-size: 0.9em;
-    font-weight: 600;
+    font-weight: normal !important;
     display: inline-block;
     margin: 10px 0;
     box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
