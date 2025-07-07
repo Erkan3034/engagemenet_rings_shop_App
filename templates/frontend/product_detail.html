@@ -2,7 +2,7 @@
 {% load static %}
 {% load frontend_extras %}
 
-{% block title %}{{ product.name }} - Nişan Yüzükleri{% endblock %}
+{% block title %}{{ product.name }} - Engagement Rings{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -965,8 +965,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'home' %}">Ana Sayfa</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'products_list' %}">Ürünler</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'products_list' %}">Products</a></li>
                 <li class="breadcrumb-item active">{{ product.name }}</li>
             </ol>
         </nav>
@@ -1001,7 +1001,7 @@
 
                 <!-- Color Selection -->
                 <div class="color-selection">
-                    <h6>Renk Seçenekleri</h6>
+                    <h6>Color Options</h6>
                     <div class="color-options">
                         {% for color in available_colors %}
                             <div class="color-option {% if forloop.first %}active{% endif %}" 
@@ -1009,9 +1009,9 @@
                                  onclick="selectColor('{{ color }}', '{{ product.images|dict_get:color }}', this)">
                                 <div class="color-dot {{ color }}"></div>
                                 <span class="color-label">
-                                    {% if color == 'yellow' %}Sarı Altın
-                                    {% elif color == 'white' %}Beyaz Altın
-                                    {% elif color == 'rose' %}Rose Altın
+                                    {% if color == 'yellow' %}Yellow Gold
+                                    {% elif color == 'white' %}White Gold
+                                    {% elif color == 'rose' %}Rose Gold
                                     {% endif %}
                                 </span>
                             </div>
@@ -1028,19 +1028,19 @@
                     <!-- Product Price -->
                     <div class="product-price-section">
                         <div class="product-price" id="productPrice">${{ product.get_dynamic_price|floatformat:2 }}</div>
-                        <p class="price-note">*Güncel altın fiyatlarına göre hesaplanmıştır</p>
+                        <p class="price-note">*Calculated based on current gold prices</p>
                     </div>
 
                     <!-- Product Meta -->
                     <div class="product-meta">
                         <div class="meta-item">
                             <i class="fas fa-star meta-icon"></i>
-                            <div class="meta-label">Popülerlik</div>
+                            <div class="meta-label">Popularity</div>
                             <div class="meta-value">{{ product.get_popularity_score_out_of_5|floatformat:1 }}/5</div>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-weight-hanging meta-icon"></i>
-                            <div class="meta-label">Ağırlık</div>
+                            <div class="meta-label">Weight</div>
                             <div class="meta-value">{{ product.weight }}g</div>
                         </div>
                     </div>
@@ -1048,49 +1048,49 @@
                     <!-- Product Tabs -->
                     <div class="product-tabs">
                         <div class="tab-nav">
-                            <button class="tab-button active" onclick="switchTab('description', this)">Açıklama</button>
-                            <button class="tab-button" onclick="switchTab('features', this)">Özellikler</button>
-                            <button class="tab-button" onclick="switchTab('care', this)">Bakım</button>
-                            <button class="tab-button" onclick="switchTab('shipping', this)">Kargo</button>
+                            <button class="tab-button active" onclick="switchTab('description', this)">Description</button>
+                            <button class="tab-button" onclick="switchTab('features', this)">Features</button>
+                            <button class="tab-button" onclick="switchTab('care', this)">Care</button>
+                            <button class="tab-button" onclick="switchTab('shipping', this)">Shipping</button>
                         </div>
 
                         <div id="description" class="tab-content active">
-                            <h5>Ürün Açıklaması</h5>
-                            <p>Bu özel nişan yüzüğü, aşkınızın benzersiz hikayesini yansıtır. Mükemmel işçilik ve kaliteli malzemelerle üretilmiştir. Her detayı özenle tasarlanmış bu yüzük, hayatınızın en özel anlarında yanınızda olacak.</p>
-                            <p>Geleneksel ustalık teknikleri ile modern tasarım anlayışının buluştuğu bu eser, nesiller boyu aktarılacak bir değer taşır.</p>
+                            <h5>Product Description</h5>
+                            <p>This special engagement ring reflects the unique story of your love. It is crafted with perfect workmanship and quality materials. Every detail of this carefully designed ring will be with you in the most special moments of your life.</p>
+                            <p>This piece, where traditional craftsmanship techniques meet modern design understanding, carries a value that will be passed down through generations.</p>
                         </div>
 
                         <div id="features" class="tab-content">
-                            <h5>Teknik Özellikler</h5>
+                            <h5>Technical Features</h5>
                             <ul class="feature-list">
-                                <li><i class="fas fa-gem"></i>Yüksek kaliteli malzeme</li>
-                                <li><i class="fas fa-tools"></i>El işçiliği ile üretim</li>
-                                <li><i class="fas fa-palette"></i>Farklı renk seçenekleri</li>
-                                <li><i class="fas fa-shield-alt"></i>Dayanıklı tasarım</li>
-                                <li><i class="fas fa-certificate"></i>Kalite sertifikası</li>
-                                <li><i class="fas fa-box"></i>Özel kutuda teslimat</li>
+                                <li><i class="fas fa-gem"></i>High quality materials</li>
+                                <li><i class="fas fa-tools"></i>Handcrafted production</li>
+                                <li><i class="fas fa-palette"></i>Different color options</li>
+                                <li><i class="fas fa-shield-alt"></i>Durable design</li>
+                                <li><i class="fas fa-certificate"></i>Quality certificate</li>
+                                <li><i class="fas fa-box"></i>Special box delivery</li>
                             </ul>
                         </div>
 
                         <div id="care" class="tab-content">
-                            <h5>Bakım ve Temizlik</h5>
+                            <h5>Care and Cleaning</h5>
                             <ul class="feature-list">
-                                <li><i class="fas fa-water"></i>Yumuşak sabunlu su ile temizleyin</li>
-                                <li><i class="fas fa-tint"></i>Kimyasal maddelerden uzak tutun</li>
-                                <li><i class="fas fa-hand-sparkles"></i>Yumuşak bezle kurulayın</li>
-                                <li><i class="fas fa-box-open"></i>Özel kutusunda saklayın</li>
-                                <li><i class="fas fa-clock"></i>Düzenli bakım yaptırın</li>
+                                <li><i class="fas fa-water"></i>Clean with soft soapy water</li>
+                                <li><i class="fas fa-tint"></i>Keep away from chemicals</li>
+                                <li><i class="fas fa-hand-sparkles"></i>Dry with soft cloth</li>
+                                <li><i class="fas fa-box-open"></i>Store in special box</li>
+                                <li><i class="fas fa-clock"></i>Have regular maintenance</li>
                             </ul>
                         </div>
 
                         <div id="shipping" class="tab-content">
-                            <h5>Kargo ve Teslimat</h5>
+                            <h5>Shipping and Delivery</h5>
                             <ul class="feature-list">
-                                <li><i class="fas fa-shipping-fast"></i>2-3 iş günü içinde kargo</li>
-                                <li><i class="fas fa-shield-alt"></i>Sigortalı gönderim</li>
-                                <li><i class="fas fa-truck"></i>Ücretsiz kargo (500₺ üzeri)</li>
-                                <li><i class="fas fa-undo"></i>14 gün iade garantisi</li>
-                                <li><i class="fas fa-phone"></i>7/24 müşteri desteği</li>
+                                <li><i class="fas fa-shipping-fast"></i>Shipping within 2-3 business days</li>
+                                <li><i class="fas fa-shield-alt"></i>Insured shipment</li>
+                                <li><i class="fas fa-truck"></i>Free shipping (over $500)</li>
+                                <li><i class="fas fa-undo"></i>14-day return guarantee</li>
+                                <li><i class="fas fa-phone"></i>24/7 customer support</li>
                             </ul>
                         </div>
                     </div>
@@ -1099,10 +1099,10 @@
                     <div class="product-actions">
                         <button class="btn btn-primary-custom" onclick="addToCart()">
                             <i class="fas fa-shopping-cart me-2"></i>
-                            <span id="cartButtonText">Sepete Ekle</span>
+                            <span id="cartButtonText">Add to Cart</span>
                         </button>
                         <button class="btn btn-secondary-custom" onclick="addToWishlist()">
-                            <i class="fas fa-heart me-2"></i>Favorilere Ekle
+                            <i class="fas fa-heart me-2"></i>Add to Favorites
                         </button>
                     </div>
 
@@ -1111,19 +1111,19 @@
                         <div class="info-grid">
                             <div class="info-item">
                                 <i class="fas fa-shipping-fast"></i>
-                                <span class="info-text">Ücretsiz Kargo</span>
+                                <span class="info-text">Free Shipping</span>
                             </div>
                             <div class="info-item">
                                 <i class="fas fa-shield-alt"></i>
-                                <span class="info-text">Kalite Garantisi</span>
+                                <span class="info-text">Quality Guarantee</span>
                             </div>
                             <div class="info-item">
                                 <i class="fas fa-undo"></i>
-                                <span class="info-text">Kolay İade</span>
+                                <span class="info-text">Easy Return</span>
                             </div>
                             <div class="info-item">
                                 <i class="fas fa-headset"></i>
-                                <span class="info-text">7/24 Destek</span>
+                                <span class="info-text">24/7 Support</span>
                             </div>
                         </div>
                     </div>
@@ -1135,7 +1135,7 @@
         {% if products %}
         <div class="related-products">
             <div class="container">
-                <h3 class="related-title">Benzer Ürünler</h3>
+                <h3 class="related-title">Similar Products</h3>
                 <div class="row">
                     {% for related_product in products|slice:":3" %}
                         {% if related_product.id != product.id %}
@@ -1153,7 +1153,7 @@
                                         </span>
                                     </div>
                                     <a href="{% url 'product_detail' related_product.id %}" class="btn btn-primary-custom btn-sm w-100">
-                                        Detayları Görüntüle
+                                        View Details
                                     </a>
                                 </div>
                             </div>
@@ -1248,12 +1248,12 @@
         const originalText = buttonText.innerHTML;
 
         // Show loading state
-        buttonText.innerHTML = '<span class="loading"></span> Ekleniyor...';
+        buttonText.innerHTML = '<span class="loading"></span> Adding...';
         button.disabled = true;
 
         // Simulate API call
         setTimeout(() => {
-            buttonText.innerHTML = '<i class="fas fa-check me-2"></i>Sepete Eklendi!';
+            buttonText.innerHTML = '<i class="fas fa-check me-2"></i>Added to Cart!';
             button.style.background = 'linear-gradient(135deg, #28a745 0%, #34ce57 100%)';
             
             // Reset after 2 seconds
@@ -1265,7 +1265,7 @@
         }, 1000);
 
         // Show success message
-        showNotification('Ürün sepete eklendi!', 'success');
+        showNotification('Product added to cart!', 'success');
     }
 
     // Add to wishlist functionality
@@ -1276,11 +1276,11 @@
         if (icon.classList.contains('fas')) {
             icon.classList.remove('fas');
             icon.classList.add('far');
-            showNotification('Favorilerden kaldırıldı!', 'info');
+            showNotification('Removed from favorites!', 'info');
         } else {
             icon.classList.remove('far');
             icon.classList.add('fas');
-            showNotification('Favorilere eklendi!', 'success');
+            showNotification('Added to favorites!', 'success');
         }
     }
 
