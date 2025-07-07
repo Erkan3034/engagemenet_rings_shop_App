@@ -114,10 +114,19 @@ WSGI_APPLICATION = 'engagement_rings_backend.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     # Production database (PostgreSQL on Render)
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
+    try:
+        import dj_database_url  # type: ignore
+        DATABASES = {
+            'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        }
+    except ImportError:
+        # Fallback to SQLite if dj_database_url not available
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     # Development database (SQLite)
     DATABASES = {
