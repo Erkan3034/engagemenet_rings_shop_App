@@ -681,7 +681,7 @@ p {
 
 .dynamic-price {
     font-size: 1.2em;
-    font-weight: 600;
+    font-weight: normal;
     color: #252523;
     font-family: 'Montserrat', sans-serif;
 }
