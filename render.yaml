@@ -1,7 +1,7 @@
 services:
   - type: web
     name: engagement-rings-app
-    runtime: python3
+    runtime: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn engagement_rings_backend.wsgi:application"
     plan: free
